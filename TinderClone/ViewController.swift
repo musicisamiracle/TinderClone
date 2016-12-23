@@ -49,7 +49,7 @@ class ViewController: UIViewController {
                 
                 if success {
                     print("Sign up successful!")
-                    self.performSegue(withIdentifier: "toUserTable", sender: self)
+                    self.performSegue(withIdentifier: "toProfile", sender: self)
                 }
                 else {
                     var message = "Please try again later"
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
                     self.createAlert(title: "Login failed", message: "Invalid username/password")
                 }
                 else {
-                    self.performSegue(withIdentifier: "toUserTable", sender: self)
+                    self.performSegue(withIdentifier: "toProfile", sender: self)
                 }
             })
         }
