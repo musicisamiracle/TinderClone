@@ -108,6 +108,14 @@ class ViewController: UIViewController {
         self.view.addSubview(activityIndicator)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if PFUser.current() != nil {
+            self.performSegue(withIdentifier: "toProfile", sender: self)
+        }
+
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

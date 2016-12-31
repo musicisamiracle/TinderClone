@@ -15,13 +15,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var genderSwitch: UISwitch!
     @IBOutlet var interestedSwitch: UISwitch!
-    
-    @IBAction func genderSwitch(_ sender: UISwitch) {
-        currentUser["gender"] = sender.isOn ? "female" : "male"
-    }
-    
-    @IBAction func interestedGenderSwitch(_ sender: UISwitch) {
-        currentUser["interestedGender"] = sender.isOn ? "female" : "male"
+
+    @IBAction func logOut(_ sender: UIBarButtonItem) {
+        PFUser.logOut()
+
+        performSegue(withIdentifier: "toLogIn", sender: self)
     }
     
     @IBAction func updateProfileImage(_ sender: Any) {
@@ -38,7 +36,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             profileImage.image = selectedImage
             
             if let imageAsData = UIImageJPEGRepresentation(selectedImage, 1) {
-                let imageFile = PFFile(data: imageAsData)
+                let imageFile = PFFile(name: "photo.jpg", data: imageAsData)
                 
                 currentUser["profileImage"] = imageFile
             }
@@ -51,6 +49,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func updateProfile(_ sender: Any) {
+        currentUser["gender"] = genderSwitch.isOn ? "female" : "male"
+        currentUser["interestedGender"] = interestedSwitch.isOn ? "female" : "male"
         currentUser.saveInBackground()
     }
     
