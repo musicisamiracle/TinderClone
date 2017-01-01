@@ -17,6 +17,8 @@
 		81BA81791A49E0DB00E65899 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81781A49E0DB00E65899 /* AudioToolbox.framework */; };
 		81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
+		AB246F761E198E9100CF3EAB /* MatchedUsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB246F751E198E9100CF3EAB /* MatchedUsersTableViewController.swift */; };
+		AB246F781E1992CF00CF3EAB /* MatchedUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB246F771E1992CF00CF3EAB /* MatchedUserTableViewCell.swift */; };
 		ABBC4EF01E0C6DCE00F4BFBA /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = ABBC4EEF1E0C6DCE00F4BFBA /* placeholder.png */; };
 		ABBC4EF21E0C6F5E00F4BFBA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBC4EF11E0C6F5E00F4BFBA /* ProfileViewController.swift */; };
 		ABC636E91E14458B007D37E1 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC636E81E14458B007D37E1 /* MatchesViewController.swift */; };
@@ -37,6 +39,8 @@
 		81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		AB246F751E198E9100CF3EAB /* MatchedUsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchedUsersTableViewController.swift; sourceTree = "<group>"; };
+		AB246F771E1992CF00CF3EAB /* MatchedUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchedUserTableViewCell.swift; sourceTree = "<group>"; };
 		ABBC4EEF1E0C6DCE00F4BFBA /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		ABBC4EF11E0C6F5E00F4BFBA /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ABC636E81E14458B007D37E1 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				ABBC4EEF1E0C6DCE00F4BFBA /* placeholder.png */,
 				ABBC4EF11E0C6F5E00F4BFBA /* ProfileViewController.swift */,
 				ABC636E81E14458B007D37E1 /* MatchesViewController.swift */,
+				AB246F751E198E9100CF3EAB /* MatchedUsersTableViewController.swift */,
+				AB246F771E1992CF00CF3EAB /* MatchedUserTableViewCell.swift */,
 			);
 			name = TinderClone;
 			path = "/Users/danethomas/Desktop/iOS Development/TinderClone/TinderClone";
@@ -198,6 +204,8 @@
 				ABBC4EF21E0C6F5E00F4BFBA /* ProfileViewController.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				ABC636E91E14458B007D37E1 /* MatchesViewController.swift in Sources */,
+				AB246F781E1992CF00CF3EAB /* MatchedUserTableViewCell.swift in Sources */,
+				AB246F761E198E9100CF3EAB /* MatchedUsersTableViewController.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
