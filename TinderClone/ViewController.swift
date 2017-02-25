@@ -43,7 +43,7 @@ class ViewController: UIViewController {
             user.password = passwordTextField.text
             
             
-            user.signUpInBackground(block: { (success, error) in
+            user.signUpInBackground(block: { [unowned self] (success, error) in
                 UIApplication.shared.endIgnoringInteractionEvents()
                 self.activityIndicator.stopAnimating()
                 
@@ -64,11 +64,11 @@ class ViewController: UIViewController {
         else {
             // logging in
             
-            PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!, block: { (user, error) in
+            PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!, block: { [unowned self] (user, error) in
                 
                 UIApplication.shared.endIgnoringInteractionEvents()
                 self.activityIndicator.stopAnimating()
-                
+
                 if error != nil {
                     self.createAlert(title: "Login failed", message: "Invalid username/password")
                 }

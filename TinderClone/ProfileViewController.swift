@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         
         if let userImage = currentUser["profileImage"] as? PFFile {
-            userImage.getDataInBackground(block: { (data, error) in
+            userImage.getDataInBackground(block: { [unowned self] (data, error) in
                 if error != nil {
                     print(error.debugDescription)
                     self.createAlert(title: "Image Download Error", message: "Unable to download image.")

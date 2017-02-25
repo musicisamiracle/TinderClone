@@ -90,7 +90,7 @@ class MatchesViewController: UIViewController {
         
         userQuery?.whereKey("objectId", notContainedIn: ignoredUsers)
         
-        userQuery?.findObjectsInBackground { (objects, error) in
+        userQuery?.findObjectsInBackground { [unowned self] (objects, error) in
             if error != nil {
                 print(error.debugDescription)
             }
@@ -110,7 +110,7 @@ class MatchesViewController: UIViewController {
     func displayPhoto(forUser user: PFUser) {
         
         if let imageFile = user["profileImage"] as? PFFile {
-            imageFile.getDataInBackground(block: { (data, error) in
+            imageFile.getDataInBackground(block: { [unowned self] (data, error) in
                 if error != nil {
                     print(error.debugDescription)
                 }

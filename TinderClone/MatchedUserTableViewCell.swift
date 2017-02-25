@@ -11,26 +11,13 @@ import Parse
 
 
 class MatchedUserTableViewCell: UITableViewCell {
+    @IBOutlet var sendButton: UIButton!
 
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var messageTextField: UITextField!
     @IBOutlet var userNameLabel: UILabel!
-    var receivingUser: PFUser?
     
-    @IBAction func sendMessage(_ sender: Any) {
-        let newMessage = PFObject(className: "Messages")
-        newMessage["sender"] = PFUser.current()
-        newMessage["receiver"] = receivingUser
-        newMessage["message"] = messageTextField.text
-        
-        newMessage.saveInBackground { (success, error) in
-            if success {
-                print("message Sent")
-                self.messageTextField.text = ""
-            }
-        }
-    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

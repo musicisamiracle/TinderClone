@@ -26,7 +26,7 @@ class MatchedUsersTableViewController: UIViewController, UITableViewDelegate, UI
 
         let query = PFUser.query()
         query?.whereKey("objectId", containedIn: acceptedUserIDs)
-        query?.findObjectsInBackground(block: { (objects, error) in
+        query?.findObjectsInBackground(block: { [unowned self] (objects, error) in
             if error != nil {
                 print(error.debugDescription)
             }
@@ -65,7 +65,7 @@ class MatchedUsersTableViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "matchesCell", for: indexPath) as! MatchedUserTableViewCell
         let user = matchedUsers[indexPath.row]
-        cell.receivingUser = user
+        cell.sendButton.addTarget(self, action: #selector(sendMessage(_:)), for: .touchUpInside)
         
         let imageFile = user["profileImage"] as! PFFile
         imageFile.getDataInBackground { (data, error) in
@@ -80,6 +80,31 @@ class MatchedUsersTableViewController: UIViewController, UITableViewDelegate, UI
 
         return cell
     }
+
+    func sendMessage(_ sender: UIButton) {
+
+        let buttonPoint = sender.convert(CGPoint(x: 0, y: 0), to: self.matchedUserTable)
+        guard let cellIndexPath = self.matchedUserTable.indexPathForRow(at: buttonPoint) else {
+            print("could not get indexPath")
+            return
+        }
+        guard let cell = self.matchedUserTable.cellForRow(at: cellIndexPath) as? MatchedUserTableViewCell else {
+            print("could not convert cell to MatchedUserTableViewCell")
+            return
+        }
+        // could use a check for empty textfield
+         let newMessage = PFObject(className: "Messages")
+         newMessage["sender"] = PFUser.current()
+         newMessage["receiver"] = matchedUsers[cellIndexPath.row]
+         newMessage["message"] = cell.messageTextField.text
+         
+         newMessage.saveInBackground { (success, error) in
+             if success {
+                 print("message Sent")
+                 cell.messageTextField.text = ""
+             }
+         }
+     }
     
     func getMessage(fromUser user: PFUser, forCell cell: MatchedUserTableViewCell) {
         let query = PFQuery(className: "Messages")
