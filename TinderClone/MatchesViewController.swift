@@ -12,18 +12,38 @@ import Parse
 /* need to query Matches to find users who have already been swiped, then don't display them.*/
 
 class MatchesViewController: UIViewController {
-
+    
+    //MARK: Properties
     @IBOutlet var userImage: UIImageView!
     var originalCenterX: CGFloat!
     var originalCenterY: CGFloat!
     var currentUser: PFUser!
     var displayedUserID: String = ""
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        originalCenterX = userImage.center.x
+        originalCenterY = userImage.center.y
+        
+        currentUser = PFUser.current()
+        
+        showNextUser()
+        
+        userImage.isUserInteractionEnabled = true
+        let swipeRecognizer = UIPanGestureRecognizer(target: self, action: #selector(imageSwiped(gestureRecognizer:)))
+        
+        userImage.addGestureRecognizer(swipeRecognizer)
+    }
+    
+    //MARK: Actions
+    
     @IBAction func logOut(_ sender: UIBarButtonItem) {
         PFUser.logOut()
         performSegue(withIdentifier: "toLogIn", sender: self)
     }
     
+    // Implements swiping right/left to accept/reject a user
     func imageSwiped(gestureRecognizer: UIPanGestureRecognizer) {
         let image = gestureRecognizer.view!
         let translation = gestureRecognizer.translation(in: self.view)
@@ -123,39 +143,7 @@ class MatchesViewController: UIViewController {
         }
         
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        originalCenterX = userImage.center.x
-        originalCenterY = userImage.center.y
-        
-        currentUser = PFUser.current()
-        
-        showNextUser()
-        
-        
-        
-        userImage.isUserInteractionEnabled = true
-        let swipeRecognizer = UIPanGestureRecognizer(target: self, action: #selector(imageSwiped(gestureRecognizer:)))
-        
-        userImage.addGestureRecognizer(swipeRecognizer)
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }

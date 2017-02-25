@@ -12,19 +12,35 @@ import Parse
 
 class ViewController: UIViewController {
     
+    //MARK: Properties
     var signUpMode = false
-    
     var activityIndicator = UIActivityIndicatorView()
-    
     @IBOutlet var usernameTextField: UITextField!
-    
     @IBOutlet var passwordTextField: UITextField!
-    
     @IBOutlet var signUpOrLogIn: UIButton!
-    
     @IBOutlet var signUpModeButton: UIButton!
-    
     @IBOutlet var messageLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(activityIndicator)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if PFUser.current() != nil {
+            self.performSegue(withIdentifier: "toProfile", sender: self)
+        }
+        
+    }
+    
+    //MARK: Actions
     
     @IBAction func signUpOrLogIn(_ sender: UIButton) {
         if usernameTextField.text == "" || passwordTextField.text == "" {
@@ -36,7 +52,6 @@ class ViewController: UIViewController {
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         if signUpMode {
-            // signing up
             
             let user = PFUser()
             user.username = usernameTextField.text
@@ -62,7 +77,7 @@ class ViewController: UIViewController {
             })
         }
         else {
-            // logging in
+            // Logging in
             
             PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!, block: { [unowned self] (user, error) in
                 
@@ -96,31 +111,7 @@ class ViewController: UIViewController {
         }
         
     }
-        
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        self.view.addSubview(activityIndicator)
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if PFUser.current() != nil {
-            self.performSegue(withIdentifier: "toProfile", sender: self)
-        }
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
 
 extension UIViewController {
